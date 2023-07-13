@@ -6,7 +6,7 @@ function CarDetail() {
     const navigate = useNavigate()
 
     function handleRent(id) {
-        navigate(`/${id}/rentalForm/${id}`)
+        navigate(`/rentalForm/${id}`)
     }
 
     useEffect(() => {

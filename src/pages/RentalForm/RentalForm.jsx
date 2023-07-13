@@ -148,6 +148,7 @@ function RentalForm() {
         }
 
         navigate("/thanks")
+        localStorage.clear()
     }
 
     return (
