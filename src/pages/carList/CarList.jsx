@@ -1,9 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import Car from '../../components/car/Car';
 
 function CarList() {
-  return (
-    <div>CarList</div>
-  )
+    const [cars, setCars] = useState([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        fetch("http://localhost:8080/cars/all").then((res) => res.json()).then((result) => {
+            setLoading(false);
+            setCars(result);
+            console.log(result);
+        })
+    }, [loading])
+
+    return (
+        <div>
+            <h1>Cars For Rent</h1>
+            <ul>
+                {loading ? "loading" : cars.map((car) => <Car car={car} key={car.id} />)}
+            </ul>
+        </div>
+    )
 }
 
 export default CarList
