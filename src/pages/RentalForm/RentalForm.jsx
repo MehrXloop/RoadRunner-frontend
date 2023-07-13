@@ -34,7 +34,7 @@ function RentalForm() {
             const returnDate = new Date(returnDateAndTime);
             const timeDiff = returnDate.getTime() - pickupDate.getTime();
             const totalDays = Math.ceil(timeDiff / (1000 * 3600 * 24));
-            return totalDays;
+            return totalDays + 1;
         }
         return 0;
     }
@@ -46,7 +46,13 @@ function RentalForm() {
     function totalPriceWithInsurance() {
         const days = calculateTotalDays();
         const total = totalPrice();
-        return (days * 15000) + total;
+        return (days * 15000) +
+            total;
+    }
+
+    function damageWavier() {
+        const days = calculateTotalDays();
+        return days * 15000;
     }
 
     function handleChangeCar() {
@@ -63,8 +69,85 @@ function RentalForm() {
 
         navigate("/")
     }
-    function handleCheckout(){
-        
+    function handleCheckout() {
+        if (checked === false) {
+            const newFormInformation = {
+                carId: car.id,
+                name: name,
+                phoneNumber: phoneNumber,
+                address: address,
+                driverLicense: driverLicense,
+                pickUpDateAndTime: pickUpDateAndTime,
+                returnDateAndTime: returnDateAndTime,
+                totalPrice: totalPrice()
+            }
+            fetch('http://localhost:8081/rentalForm/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newFormInformation)
+            })
+                .then(response => {
+                    console.log("done")
+                })
+                .catch(error => {
+                    console.error('Error saving data:', error);
+                });
+
+        }
+        else {
+            const newFormInformationWithInsurance = {
+                carId: car.id,
+                name: name,
+                phoneNumber: phoneNumber,
+                address: address,
+                driverLicense: driverLicense,
+                pickUpDateAndTime: pickUpDateAndTime,
+                returnDateAndTime: returnDateAndTime,
+                totalPrice: totalPriceWithInsurance()
+            }
+            fetch('http://localhost:8081/rentalForm/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newFormInformationWithInsurance)
+            })
+                .then(response => {
+                    console.log("done")
+
+                })
+                .catch(error => {
+                    console.error('Error saving data:', error);
+                });
+            const DamageWavier = {
+                carId: 6,
+                name: name,
+                phoneNumber: phoneNumber,
+                address: address,
+                driverLicense: driverLicense,
+                pickUpDateAndTime: pickUpDateAndTime,
+                returnDateAndTime: returnDateAndTime,
+                totalPrice: damageWavier()
+            }
+            fetch('http://localhost:8081/rentalForm/add', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(DamageWavier)
+            })
+                .then(response => {
+                    console.log("done")
+
+                })
+                .catch(error => {
+                    console.error('Error saving data:', error);
+                });
+        }
+
+        navigate("/thanks")
     }
 
     return (
@@ -77,7 +160,7 @@ function RentalForm() {
                 <label htmlFor="address">Address:</label><br />
                 <input type="text" id="address" name="address" value={address} onChange={e => setAddress(e.target.value)} required /><br />
                 <label htmlFor="phoneNumber">Phone Number:</label><br />
-                <input type="tel" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} required /><br />
+                <input type="number" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} required /><br />
                 <label htmlFor="driverLicense">Driver License:</label><br />
                 <input type="text" id="driverLicense" name="driverLicense" value={driverLicense} onChange={e => setDriverLicense(e.target.value)} required /><br />
                 <label htmlFor="pickUpDateAndTime">Pick Up Date & Time:</label><br />
