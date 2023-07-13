@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom'
+import styles from "./RentalForm.module.css"
 function RentalForm() {
     const navigate = useNavigate();
     const { id } = useParams();
@@ -153,42 +154,51 @@ function RentalForm() {
 
     return (
         <div>
+            <div className={styles.container}>
+                <div>
+                    <h1>Your Chosen Car Information</h1>
+                </div>
+                <div className={styles.info}>
+                    <img src={car.imageLink} alt="" width="150" />
+                    <h4>Name: {car.name}</h4>
+                    <p>price per day: {car.rentalFeePerDay}</p>
+                </div>
 
-            <p>price per day: {car.rentalFeePerDay}</p>
-            <form>
-                <label htmlFor="name">Name:</label><br />
-                <input type="text" id="name" name="name" value={name} onChange={e => setName(e.target.value)} required /><br />
-                <label htmlFor="address">Address:</label><br />
-                <input type="text" id="address" name="address" value={address} onChange={e => setAddress(e.target.value)} required /><br />
-                <label htmlFor="phoneNumber">Phone Number:</label><br />
-                <input type="number" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} required /><br />
-                <label htmlFor="driverLicense">Driver License:</label><br />
-                <input type="text" id="driverLicense" name="driverLicense" value={driverLicense} onChange={e => setDriverLicense(e.target.value)} required /><br />
-                <label htmlFor="pickUpDateAndTime">Pick Up Date & Time:</label><br />
-                <input type="datetime-local" id="pickUpDateAndTime" name="pickUpDateAndTime" value={pickUpDateAndTime} onChange={e => setPickUpDateAndTime(e.target.value)} required /><br />
-                <label htmlFor="returnDateAndTime">Return Date & Time:</label><br />
-                <input type="datetime-local" id="returnDateAndTime" name="returnDateAndTime" value={returnDateAndTime} onChange={e => setReturnDateAndTime(e.target.value)} required /><br />
+            </div>
+            <form className={styles.containerForm}>
+                <h1>Rental Form</h1>
+                <div className={styles.containerFormInput}>
+                    <label htmlFor="name">Name:</label><br />
+                    <input type="text" id="name" name="name" value={name} onChange={e => setName(e.target.value)} required /><br />
+                    <label htmlFor="address">Address:</label><br />
+                    <input type="text" id="address" name="address" value={address} onChange={e => setAddress(e.target.value)} required /><br />
+                    <label htmlFor="phoneNumber">Phone Number:</label><br />
+                    <input type="number" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} required /><br />
+                    <label htmlFor="driverLicense">Driver License:</label><br />
+                    <input type="text" id="driverLicense" name="driverLicense" value={driverLicense} onChange={e => setDriverLicense(e.target.value)} required /><br />
+                    <label htmlFor="pickUpDateAndTime">Pick Up Date & Time:</label><br />
+                    <input type="datetime-local" id="pickUpDateAndTime" name="pickUpDateAndTime" value={pickUpDateAndTime} onChange={e => setPickUpDateAndTime(e.target.value)} required /><br />
+                    <label htmlFor="returnDateAndTime">Return Date & Time:</label><br />
+                    <input type="datetime-local" id="returnDateAndTime" name="returnDateAndTime" value={returnDateAndTime} onChange={e => setReturnDateAndTime(e.target.value)} required /><br />
+                    <label htmlFor="totalPrice">Total Price:</label><br />
+                    <input type="text" value={totalPrice()} readOnly /><br />
 
-                <label htmlFor="totalPrice">TotalDays:</label><br />
-                <input type="text" value={calculateTotalDays()} readOnly /><br />
+                    <div className={styles.checkboxWrapper}>
+                        <input type="checkbox" checked={checked} onChange={e => setChecked(e.target.checked)} className={styles.checkbox} /><br />
+                        <label htmlFor="insurance">Damage Protection Rs 15,000</label><br />
+                    </div>
 
+                    {checked && <>
+                        <label htmlFor="totalPrice">Total price with insurance:</label><br />
+                        <input type="text" value={totalPriceWithInsurance()} readOnly /><br />
+                    </>
+                    }
+                </div>
 
-                <label htmlFor="totalPrice">total price:</label><br />
-                <input type="text" value={totalPrice()} readOnly /><br />
-
-
-                <label htmlFor="insurance">Want to pay for insurance per day Rs 15,000</label>
-                <input type="checkbox" checked={checked} onChange={e => setChecked(e.target.checked)} /><br />
-
-                {checked && <>
-                    <label htmlFor="totalPrice">total price with insurance:</label><br />
-                    <input type="text" value={totalPriceWithInsurance()} readOnly /><br />
-                </>
-                }
-
-
-                <button onClick={handleChangeCar}>Change Car</button>
-                <button onClick={handleCheckout}>Checkout</button>
+                <div className={styles.btnWrapper}>
+                    <button onClick={handleChangeCar}>Change Car</button>
+                    <button onClick={handleCheckout}>Checkout</button>
+                </div>
 
             </form>
 

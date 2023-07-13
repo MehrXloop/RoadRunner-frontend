@@ -1,0 +1,50 @@
+.container {
+  background: #6f090986;
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.21);
+  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  margin: 2% 10%;
+  padding: 1% 2%;
+}
+.container h1 {
+  color: rgba(245, 245, 245, 0.887);
+  text-align: center;
+}
+.containerImage {
+  display: flex;
+  justify-content: center;
+  margin: 2% auto;
+  width: 50%;
+}
+.containerImage img{
+  width: 100%;
+}
+.longDesc {
+  padding: 1% 3%;
+  color: white;
+  text-align: center;
+}
+.container span{
+    color: white;
+}
+.container p {
+  font-size: 1.2rem;
+}
+.container button {
+  outline: none;
+  border: none;
+  padding: 0.5rem;
+  margin: 3% auto;
+  border-radius: 15px;
+  font-size: 1em;
+  background-color: white;
+  color: black;
+  cursor: pointer;
+  font-weight: bold;
+  transition: all 200ms ease-in-out;
+}
+.container button:hover {
+  background-color: transparent;
+}

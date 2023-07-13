@@ -14,7 +14,6 @@ function CarList() {
 
     return (
         <div>
-            <h1>Cars For Rent</h1>
             <ul>
                 {loading ? "loading" : cars.map((car, index) => {
                     if (index <= 4) {

@@ -1,5 +1,6 @@
-import React ,{ useState, useEffect } from 'react';
-import { useParams , useNavigate} from 'react-router-dom'
+import React, { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom'
+import styles from "./CarDetail.module.css"
 function CarDetail() {
     const [car, setCar] = useState({})
     const { id } = useParams();
@@ -17,11 +18,16 @@ function CarDetail() {
     }, [id])
 
     return (
-        <div>
+        <div className={styles.container}>
             <h1>{car.name}</h1>
-            <img src={car.imageLink} alt={car.name} />
-            <p>{car.longDesc}</p>
-            <p>RS {car.rentalFeePerDay}</p>
+            <div className={styles.containerImage}>
+                <img src={car.imageLink} alt={car.name}/>
+            </div>
+            <div>
+                <p>Description:</p>
+            </div>
+            <p className={styles.longDesc}>{car.longDesc}</p>
+            <p>Rental Price Per Day: <span>{car.rentalFeePerDay}</span></p>
 
             <button onClick={() => handleRent(car.id)}>Rent me now</button>
         </div>

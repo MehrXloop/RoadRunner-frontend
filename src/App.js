@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import './App.css'
+import NavBar from "./components/navbar/NavBar";
 import CarDetail from "./pages/carDetail/CarDetail";
 import CarList from "./pages/carList/CarList";
 import RentalForm from "./pages/RentalForm/RentalForm";
@@ -8,6 +10,7 @@ function App() {
   return (
     <div>
       <Router>
+        <NavBar/>
         <Routes>
           <Route path='/' element={<CarList/>}/>
           <Route path='/:id' element={<CarDetail/>}/>
