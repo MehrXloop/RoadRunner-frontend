@@ -9,7 +9,6 @@ function CarList() {
         fetch("http://localhost:8080/cars/all").then((res) => res.json()).then((result) => {
             setLoading(false);
             setCars(result);
-            console.log(result);
         })
     }, [loading])
 
@@ -17,7 +16,11 @@ function CarList() {
         <div>
             <h1>Cars For Rent</h1>
             <ul>
-                {loading ? "loading" : cars.map((car) => <Car car={car} key={car.id} />)}
+                {loading ? "loading" : cars.map((car, index) => {
+                    if (index <= 4) {
+                        return <Car car={car} key={car.id} />
+                    }
+                })}
             </ul>
         </div>
     )
