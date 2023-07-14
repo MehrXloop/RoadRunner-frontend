@@ -13,7 +13,6 @@ function CarDetail() {
     useEffect(() => {
         fetch(`http://localhost:8080/cars/${id}`).then((res) => res.json()).then((result) => {
             setCar(result);
-            console.log(result);
         })
     }, [id])
 
@@ -21,7 +20,7 @@ function CarDetail() {
         <div className={styles.container} data-testid="carDetail">
             <h1>{car.name}</h1>
             <div className={styles.containerImage}>
-                <img src={car.imageLink} alt={car.name}/>
+                <img src={car.imageLink} alt={car.name} />
             </div>
             <div>
                 <p>Description:</p>

@@ -66,7 +66,6 @@ function RentalForm() {
             returnDateAndTime: returnDateAndTime
         }
         localStorage.setItem("myData", JSON.stringify(myData));
-        console.log(myData)
 
         navigate("/")
     }
@@ -154,7 +153,7 @@ function RentalForm() {
 
     return (
         <div>
-            <div className={styles.container}>
+            <div className={styles.container} data-testid="carDetail">
                 <div>
                     <h1>Your Chosen Car Information</h1>
                 </div>
@@ -165,17 +164,17 @@ function RentalForm() {
                 </div>
 
             </div>
-            <form className={styles.containerForm}>
+            <form className={styles.containerForm} data-testid="form">
                 <h1>Rental Form</h1>
                 <div className={styles.containerFormInput}>
                     <label htmlFor="name">Name:</label><br />
-                    <input type="text" id="name" name="name" value={name} onChange={e => setName(e.target.value)} required /><br />
+                    <input type="text" id="name" name="name" value={name} onChange={e => setName(e.target.value)} required data-testid="name" /><br />
                     <label htmlFor="address">Address:</label><br />
-                    <input type="text" id="address" name="address" value={address} onChange={e => setAddress(e.target.value)} required /><br />
+                    <input type="text" id="address" name="address" value={address} onChange={e => setAddress(e.target.value)} required data-testid="address" /><br />
                     <label htmlFor="phoneNumber">Phone Number:</label><br />
-                    <input type="number" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} required /><br />
+                    <input type="number" id="phoneNumber" name="phoneNumber" value={phoneNumber} onChange={e => setPhoneNumber(e.target.value)} required data-testid="number" /><br />
                     <label htmlFor="driverLicense">Driver License:</label><br />
-                    <input type="text" id="driverLicense" name="driverLicense" value={driverLicense} onChange={e => setDriverLicense(e.target.value)} required /><br />
+                    <input type="text" id="driverLicense" name="driverLicense" value={driverLicense} onChange={e => setDriverLicense(e.target.value)} required data-testid="license" /><br />
                     <label htmlFor="pickUpDateAndTime">Pick Up Date & Time:</label><br />
                     <input type="datetime-local" id="pickUpDateAndTime" name="pickUpDateAndTime" value={pickUpDateAndTime} onChange={e => setPickUpDateAndTime(e.target.value)} required /><br />
                     <label htmlFor="returnDateAndTime">Return Date & Time:</label><br />

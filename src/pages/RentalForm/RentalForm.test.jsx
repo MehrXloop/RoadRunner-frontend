@@ -1,8 +1,9 @@
-import { render, screen, waitFor} from "@testing-library/react"
-import CarList from "./CarList"
+import { render, screen } from '@testing-library/react';
+import { MemoryRouter } from 'react-router-dom';
+import RentalForm from "./RentalForm"
 
 
-describe("testing carList component", () => {
+describe("testing RentalForm component", () => {
     const mockCarList = {
         id: 2,
         name: "Porsche Mission X",
@@ -10,7 +11,7 @@ describe("testing carList component", () => {
         longDesc: "Introducing the Porsche Mission X Concept Supercar, an electrifying vision of the future that will ignite your senses. With its sleek and aerodynamic design, this masterpiece seamlessly blends innovation and style. Powered by advanced electric technology, it delivers exhilarating performance with zero emissions. Brace yourself as the electric motors unleash a staggering 800 horsepower, propelling you from 0 to 60 mph in a blink of an eye. Inside, experience a futuristic cockpit where cutting-edge technology and luxurious comfort converge. With the Porsche Mission X Concept Supercar, redefine your driving experience and embrace the thrill of sustainable speed. Rent it today and embrace the future of automotive excellence",
         imageLink: "https://raw.githubusercontent.com/jeff-lent/roadrunnercars/main/PorscheMissionX.png",
         rentalFeePerDay: 200000
-        };
+    };
     beforeEach(() => {
         jest.spyOn(global, 'fetch').mockResolvedValue({
             json: jest.fn().mockResolvedValue([mockCarList]),
@@ -21,25 +22,19 @@ describe("testing carList component", () => {
         jest.restoreAllMocks();
     });
 
+    test("that it render the form properly", () => {
+        render(<MemoryRouter><RentalForm /></MemoryRouter>);
+        const formElement = screen.getByTestId("form");
+        expect(screen.getByTestId("name")).toBeInTheDocument();
+        expect(screen.getByTestId("address")).toBeInTheDocument();
+        expect(screen.getByTestId("number")).toBeInTheDocument();
+        expect(screen.getByTestId("license")).toBeInTheDocument();
+        expect(formElement).toBeInTheDocument();
+    })
 
-    it('should render a list of cars', async () => {
-        render(<CarList />);
-
-        await waitFor(() => {
-            expect(global.fetch).toHaveBeenCalledWith(
-                'http://localhost:8080/cars/all'
-            );
-        });
-
-        const listElements = screen.getAllByTestId('list');
+    test("that it renders car information", async () => {
+        render(<MemoryRouter><RentalForm /></MemoryRouter>)
+        const listElements = screen.getAllByTestId('carDetail');
         expect(listElements).toHaveLength(1);
-    });
-
-
-    test('render loading message while fetching', () => {
-        render(<CarList />);
-        const message = screen.getByText("loading...");
-        expect(message).toBeInTheDocument();
-
     })
 })
