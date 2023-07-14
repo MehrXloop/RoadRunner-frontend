@@ -18,7 +18,7 @@ function CarDetail() {
     }, [id])
 
     return (
-        <div className={styles.container}>
+        <div className={styles.container} data-testid="carDetail">
             <h1>{car.name}</h1>
             <div className={styles.containerImage}>
                 <img src={car.imageLink} alt={car.name}/>
