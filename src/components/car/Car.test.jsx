@@ -27,6 +27,7 @@ describe("testing Car component", () => {
         expect(screen.getByText(car.name)).toBeInTheDocument();
         expect(screen.getByText(car.shortDesc)).toBeInTheDocument();
         expect(screen.getByText(car.rentalFeePerDay.toLocaleString())).toBeInTheDocument();
+        expect(screen.getByRole("button")).toBeInTheDocument();
 
     })
 
