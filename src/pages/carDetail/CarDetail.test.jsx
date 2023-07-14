@@ -1,4 +1,4 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react"
+import { render, screen } from "@testing-library/react"
 import CarDetail from "./CarDetail"
 import { MemoryRouter } from 'react-router-dom';
 
