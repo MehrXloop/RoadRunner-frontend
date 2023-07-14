@@ -8,7 +8,7 @@ function Car({ car }) {
         navigate(`rentalForm/${id}`)
     }
     return (
-        <li className={styles.container}>
+        <li className={styles.container} data-testid="car">
             <h1><Link to={`/${car.id}`}>{car.name}</Link> </h1>
             <div className={styles.flexContainer}>
                 <div>
