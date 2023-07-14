@@ -8,7 +8,7 @@ import Thanks from "./pages/thanks/Thanks";
 
 function App() {
   return (
-    <div>
+    <div data-testid="app">
       <Router>
         <NavBar/>
         <Routes>

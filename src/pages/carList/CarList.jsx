@@ -13,15 +13,13 @@ function CarList() {
     }, [loading])
 
     return (
-        <div>
-            <ul>
-                {loading ? "loading" : cars.map((car, index) => {
+            <ul data-testid='list'>
+                {loading ? "loading..." : cars.map((car, index) => {
                     if (index <= 4) {
                         return <Car car={car} key={car.id} />
                     }
                 })}
             </ul>
-        </div>
     )
 }
 
